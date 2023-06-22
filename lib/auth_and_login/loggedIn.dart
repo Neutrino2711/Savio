@@ -1,14 +1,10 @@
-import 'package:exp_man/google_signin.dart';
+import 'package:exp_man/auth_and_login/google_signin.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'login.dart';
 // import 'package:movie_app/providers/loader.dart';
 // import 'package:movie_app/providers/user.dart';
 
-import 'custom_textfield.dart';
-import 'custom_button.dart';
-import 'custom_password.dart';
 // import 'networking.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +14,6 @@ class LoggedIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
-    var dimensions = MediaQuery.of(context).size;
     return Scaffold(
         appBar: AppBar(
           actions: [
@@ -28,10 +23,12 @@ class LoggedIn extends StatelessWidget {
                     Provider.of<GoogleSignInProvider>(context, listen: false);
                 provider.googleLogout();
               },
-              child: Text('Logout',
-              style: TextStyle(
-                color: Colors.white,
-              ),),
+              child: const Text(
+                'Logout',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
             )
           ],
         ),
@@ -42,7 +39,7 @@ class LoggedIn extends StatelessWidget {
             children: [
               const SizedBox(height: 50),
               Text('Profile', style: Theme.of(context).textTheme.titleLarge),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               CircleAvatar(
@@ -50,10 +47,10 @@ class LoggedIn extends StatelessWidget {
                 backgroundImage: NetworkImage(user!.photoURL.toString()),
               ),
               Text(
-                'Name: ' + user.displayName.toString(),
+                'Name: ${user.displayName}',
               ),
               Text(
-                'Email: ' + user.email.toString(),
+                'Email: ${user.email}',
               )
             ],
           )),

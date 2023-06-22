@@ -19,17 +19,17 @@ class home extends StatelessWidget {
             width: 170.0,
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  shape: StadiumBorder(), backgroundColor: Colors.blue),
+                  shape: const StadiumBorder(), backgroundColor: Colors.blue),
               onPressed: () {
                 Navigator.pushNamed(context, LoginPage.routename);
               },
-              child: Text(
+              child: const Text(
                 'login',
                 style: TextStyle(color: Colors.white),
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 60.0,
           ),
           SizedBox(
@@ -37,29 +37,28 @@ class home extends StatelessWidget {
             width: 170.0,
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
-                shape: StadiumBorder(),
+                shape: const StadiumBorder(),
                 backgroundColor: Colors.blue,
               ),
               onPressed: () {
                 Navigator.pushNamed(context, RegisterPage.routeName);
               },
-              child: Text('Register',
+              child: const Text('Register',
                   style: TextStyle(
                     color: Colors.white,
                   )),
             ),
           ),
-          
           SizedBox(
             height: 70.0,
             width: 170.0,
             child: OutlinedButton(
               style: OutlinedButton.styleFrom(
-                  shape: StadiumBorder(), backgroundColor: Colors.blue),
+                  shape: const StadiumBorder(), backgroundColor: Colors.blue),
               onPressed: () {
                 Navigator.pushNamed(context, LoginPage.routename);
               },
-              child: Text(
+              child: const Text(
                 'SignIn Google',
                 style: TextStyle(color: Colors.white),
               ),

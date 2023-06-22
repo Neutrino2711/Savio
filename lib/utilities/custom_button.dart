@@ -34,7 +34,7 @@ class CustomButton extends StatelessWidget {
           ),
           onTap: () {
             HapticFeedback.vibrate();
-            
+
             action();
           },
           splashColor: Colors.white.withOpacity(0.5),
