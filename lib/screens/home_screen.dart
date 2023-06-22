@@ -6,15 +6,10 @@ import 'package:exp_man/utilities/navigation_bar.dart';
 import 'package:exp_man/providers/student.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  void addExpenseBottomSheet() {
+  void addExpenseBottomSheet(BuildContext context) {
     showModalBottomSheet(
         useSafeArea: true,
         isScrollControlled: true,
@@ -24,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Student student = Provider.of<Student>(context, listen: false);
+    Student student = Provider.of<Student>(context);
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
@@ -77,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         style:
                             const TextStyle(color: Colors.black, fontSize: 30),
                       ),
+                      Text(student.transactions.length.toString()),
                     ],
                   ),
                 ),
@@ -84,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             MyCustomBottomNavigationBar(
               onAddPress: () {
-                addExpenseBottomSheet();
+                addExpenseBottomSheet(context);
               },
             ),
           ],

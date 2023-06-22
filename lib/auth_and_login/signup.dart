@@ -16,11 +16,9 @@ class RegisterPage extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
 
-  String? name, email, pass, city;
-
   RegisterPage({super.key});
 
-  APIModel apiModel = APIModel();
+  final APIModel apiModel = APIModel();
 
   @override
   Widget build(BuildContext context) {
@@ -81,14 +79,7 @@ class RegisterPage extends StatelessWidget {
                       dynamic newUserDetail = jsonDecode(newUserData.body);
                       Student student =
                           Provider.of<Student>(context, listen: false);
-                      student.update(
-                          id: newUserDetail['id'],
-                          email: newUserDetail['email'],
-                          name: newUserDetail['name'],
-                          city: newUserDetail['city'],
-                          transactions: newUserDetail['transactions'],
-                          budgets: newUserDetail['budgets'],
-                          credit_score: newUserDetail['credit_score']);
+                      student.update(data: newUserDetail);
                       Navigator.push(
                           context,
                           MaterialPageRoute(

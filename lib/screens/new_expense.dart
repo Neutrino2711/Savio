@@ -1,4 +1,6 @@
+import 'package:exp_man/providers/student.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum Category { food, travel, work, leisure }
 
@@ -13,37 +15,6 @@ class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   Category _selectedCategory = Category.leisure;
-
-  void _submitExpenseData() {
-    //can this be made async
-    final enteredAmount = double.tryParse(_amountController.text);
-    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
-    if (_titleController.text.trim().isEmpty || amountIsInvalid) {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Invalid Input'),
-          content: const Text(
-              "Make sure a valid title, amount and category was entered."),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('Okay'),
-            )
-          ],
-        ),
-      );
-      return;
-      //no code written here will run as return is added above
-    }
-    //as all values are valid need to run addTransaction api
-    else {
-      Navigator.pop(
-          context); //this is right as our motive is to pop bottom sheet when an expense is acctually added in the screen not just everytime the save button is pressed
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,9 +88,34 @@ class _NewExpenseState extends State<NewExpense> {
                         width: 16,
                       ),
                       ElevatedButton(
-                        onPressed: () {
-                          _submitExpenseData();
-                          // Navigator.pop(context);   using navigator here will pop the popup that comes up when an invalid input is entered
+                        onPressed: () async {
+                          bool added = await Provider.of<Student>(context,
+                                  listen: false)
+                              .addTransaction(
+                                  title: _titleController.text,
+                                  amount:
+                                      double.tryParse(_amountController.text),
+                                  category: _selectedCategory.index);
+                          if (!added) {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text('Invalid Input'),
+                                content: const Text(
+                                    "Make sure a valid title, amount and category was entered."),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Okay'),
+                                  )
+                                ],
+                              ),
+                            );
+                          } else {
+                            Navigator.pop(context);
+                          }
                         },
                         child: const Text('Save Expenses'),
                       ),

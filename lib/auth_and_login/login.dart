@@ -65,14 +65,7 @@ class LoginPage extends StatelessWidget {
                           //user found
                           // if (mounted!) return;
                           dynamic userDetail = jsonDecode(userData.body);
-                          Provider.of<Student>(context, listen: false).update(
-                              id: userDetail['id'],
-                              email: userDetail['email'],
-                              name: userDetail['name'],
-                              city: userDetail['city'],
-                              transactions: userDetail['transactions'],
-                              budgets: userDetail['budgets'],
-                              credit_score: userDetail['credit_score']);
+                          Provider.of<Student>(context, listen: false).update(data: userDetail);
                           // print(student.name);
                           Navigator.push(
                               context,

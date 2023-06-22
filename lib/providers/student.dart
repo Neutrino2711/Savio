@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:exp_man/services/networking.dart';
+import 'package:http/http.dart';
 import 'package:flutter/cupertino.dart';
 
 class Student with ChangeNotifier {
@@ -9,21 +13,38 @@ class Student with ChangeNotifier {
   double credit_score = 0.0;
   String city = '';
 
-  void update({
-    required int id,
-    required String email,
-    required String name,
-    required String city,
-    required List<dynamic> transactions,
-    required List<dynamic> budgets,
-    required double credit_score,
-  }) {
-    this.id = id;
-    this.email = email;
-    this.name = name;
-    this.city = city;
-    this.transactions = transactions;
-    this.budgets = budgets;
-    this.credit_score = credit_score;
+  void update({required dynamic data}) {
+    id = data['id'];
+    email = data['email'];
+    name = data['name'];
+    transactions = data['transactions'];
+    budgets = data['budgets'];
+    credit_score = data['credit_score'];
+    city = data['city'];
+  }
+
+  Future<bool> addTransaction(
+      {required String title,
+      required double? amount,
+      required int category}) async {
+    if (title.isEmpty || amount == null || amount < 0) {
+      return Future.value(false);
+    }
+    Response response = await NetworkHelper().postData(
+        url: 'addTransaction/',
+        jsonMap: {
+          'title': title,
+          'amount': amount,
+          'categoty': category,
+          'student': id
+        });
+    dynamic data = jsonDecode(response.body);
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      update(data: data);
+      notifyListeners();
+      return Future.value(true);
+    } else {
+      return Future.value(false);
+    }
   }
 }
