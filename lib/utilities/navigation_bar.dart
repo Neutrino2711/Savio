@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class MyCustomBottomNavigationBar extends StatefulWidget {
-  MyCustomBottomNavigationBar({super.key, required this.onAddPress});
+  MyCustomBottomNavigationBar(
+      {super.key, required this.onAddPress, required this.onProfilePress});
 
   void Function() onAddPress;
+  void Function() onProfilePress;
 
   @override
   State<MyCustomBottomNavigationBar> createState() =>
@@ -124,7 +126,7 @@ class _MyCustomBottomNavigationBarState
             IconButton(
               icon: Icon(
                 Icons.home,
-                color: currentValue == 0 ? Colors.orange : Colors.black38,
+                color: currentValue == 0 ? Colors.blue : Colors.black38,
                 size: _animation!.value,
               ),
               onPressed: () {
@@ -144,7 +146,7 @@ class _MyCustomBottomNavigationBarState
             IconButton(
               icon: Icon(
                 Icons.message,
-                color: currentValue == 1 ? Colors.orange : Colors.black38,
+                color: currentValue == 1 ? Colors.blue : Colors.black38,
                 size: _animation2!.value,
               ),
               onPressed: () {
@@ -164,7 +166,7 @@ class _MyCustomBottomNavigationBarState
             IconButton(
               icon: Icon(
                 Icons.add_box_rounded,
-                color: currentValue == 2 ? Colors.orange : Colors.black38,
+                color: currentValue == 2 ? Colors.blue : Colors.black38,
                 size: _animation3!.value,
               ),
               onPressed: () {
@@ -185,7 +187,7 @@ class _MyCustomBottomNavigationBarState
             IconButton(
               icon: Icon(
                 Icons.favorite_rounded,
-                color: currentValue == 3 ? Colors.orange : Colors.black38,
+                color: currentValue == 3 ? Colors.blue : Colors.black38,
                 size: _animation4!.value,
               ),
               onPressed: () {
@@ -205,10 +207,11 @@ class _MyCustomBottomNavigationBarState
             IconButton(
               icon: Icon(
                 Icons.person_rounded,
-                color: currentValue == 4 ? Colors.orange : Colors.black38,
+                color: currentValue == 4 ? Colors.blue : Colors.black38,
                 size: _animation5!.value,
               ),
               onPressed: () {
+                widget.onProfilePress();
                 setState(() {
                   currentValue = 4;
                   _controller5!.forward();

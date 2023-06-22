@@ -19,7 +19,7 @@ class Student with ChangeNotifier {
     name = data['name'];
     transactions = data['transactions'];
     budgets = data['budgets'];
-    credit_score = data['credit_score'];
+    credit_score = double.tryParse(data['credit_score'] as String)!;
     city = data['city'];
   }
 
@@ -35,7 +35,7 @@ class Student with ChangeNotifier {
         jsonMap: {
           'title': title,
           'amount': amount,
-          'categoty': category,
+          'category': category,
           'student': id
         });
     dynamic data = jsonDecode(response.body);

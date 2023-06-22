@@ -25,31 +25,32 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData.dark().copyWith(
-              textTheme: TextTheme(
-                titleLarge: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white.withOpacity(0.9)),
-                bodyMedium:
-                    const TextStyle(fontSize: 18, color: Colors.white70),
-                bodySmall: const TextStyle(fontSize: 13, color: Colors.white70),
-                titleMedium: const TextStyle(fontSize: 19),
-                titleSmall: const TextStyle(fontSize: 15),
-              ),
-              chipTheme: ChipThemeData(
-                backgroundColor: Colors.white.withOpacity(0.9),
-                selectedColor: Colors.amber,
-                disabledColor: Colors.white70,
-              ),
-              colorScheme: ColorScheme.fromSwatch().copyWith(
-                secondary: Colors.white70,
-                // primary: Colors.white70,
-              ),
-              scaffoldBackgroundColor: const Color.fromRGBO(24, 25, 32, 1),
-              drawerTheme: const DrawerThemeData(
-                backgroundColor: Color.fromRGBO(24, 25, 32, 1),
-              )),
+          theme: ThemeData.light(),
+          // theme: ThemeData.dark().copyWith(
+          //     textTheme: TextTheme(
+          //       titleLarge: TextStyle(
+          //           fontSize: 24,
+          //           fontWeight: FontWeight.bold,
+          //           color: Colors.white.withOpacity(0.9)),
+          //       bodyMedium:
+          //           const TextStyle(fontSize: 18, color: Colors.white70),
+          //       bodySmall: const TextStyle(fontSize: 13, color: Colors.white70),
+          //       titleMedium: const TextStyle(fontSize: 19),
+          //       titleSmall: const TextStyle(fontSize: 15),
+          //     ),
+          //     chipTheme: ChipThemeData(
+          //       backgroundColor: Colors.white.withOpacity(0.9),
+          //       selectedColor: Colors.amber,
+          //       disabledColor: Colors.white70,
+          //     ),
+          //     colorScheme: ColorScheme.fromSwatch().copyWith(
+          //       secondary: Colors.white70,
+          //       // primary: Colors.white70,
+          //     ),
+          //     scaffoldBackgroundColor: const Color.fromRGBO(24, 25, 32, 1),
+          //     drawerTheme: const DrawerThemeData(
+          //       backgroundColor: Color.fromRGBO(24, 25, 32, 1),
+          //     )),
           // home: HomePage(),
           routes: {
             '/': (context) => LoginPage(),
