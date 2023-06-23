@@ -1,3 +1,4 @@
+import 'package:exp_man/utilities/circular_icon_card.dart';
 import 'package:flutter/material.dart';
 import 'package:exp_man/utilities/graph_generator.dart';
 import 'package:exp_man/widgets/transaction_tile.dart';
@@ -22,26 +23,43 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 width: size.width,
               ),
-              Container(
-                margin:
-                    const EdgeInsets.only(left: 5, right: 5, bottom: 8, top: 8),
-                width: double.infinity,
-                height: size.width * 0.68,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: const [
-                    BoxShadow(
-                      blurRadius: 1,
-                      offset: Offset(0, 1),
-                      color: Color.fromARGB(255, 194, 194, 194),
-                    ),
-                  ],
-                ),
-                child: const GraphGenerator(),
+              const GraphGenerator(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const CircularIconCard(),
+                  const CircularIconCard(),
+                  elongatedContainer(size),
+                ],
               ),
               const TransactionTileBuilder(),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Expanded elongatedContainer(Size size) {
+    return Expanded(
+      child: InkWell(
+        onTap: () {},
+        child: Container(
+          margin: const EdgeInsets.only(left: 5, right: 5, bottom: 8, top: 8),
+          height: size.width * 0.15,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(35),
+            boxShadow: const [
+              BoxShadow(
+                blurRadius: 1,
+                offset: Offset(0, 1),
+                color: Color.fromARGB(255, 194, 194, 194),
+              ),
+            ],
+          ),
+          child: const Center(
+            child: Text('monthly saving'),
           ),
         ),
       ),

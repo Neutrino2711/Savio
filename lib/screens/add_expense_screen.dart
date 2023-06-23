@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 enum Category { food, travel, work, leisure }
 
 class AddExpenseScreen extends StatefulWidget {
-  const AddExpenseScreen({super.key});
+  AddExpenseScreen({super.key, required this.onNewExpenseSave});
+
+  void Function()? onNewExpenseSave;
 
   @override
   State<AddExpenseScreen> createState() => _AddExpenseScreenState();
@@ -71,15 +73,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Cancel'),
-                  ),
-                  const SizedBox(
-                    width: 16,
-                  ),
+                  const Spacer(),
                   ElevatedButton(
                     onPressed: () async {
                       bool added = await Provider.of<Student>(context,
@@ -106,7 +100,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                           ),
                         );
                       } else {
-                        Navigator.pop(context);
+                        widget.onNewExpenseSave!();
                       }
                     },
                     child: const Text('Save Expenses'),

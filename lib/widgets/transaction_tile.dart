@@ -30,7 +30,8 @@ class TransactionTileBuilder extends StatelessWidget {
                   children: [
                     Text('\$${student.transactions[index]['amount']}'),
                     const Spacer(),
-                    Text('${student.transactions[index]['category']}')
+                    Text(
+                        'category: ${student.transactions[index]['category']}'),
                   ],
                 )
               ],

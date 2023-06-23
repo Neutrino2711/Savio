@@ -6,9 +6,26 @@ class GraphGenerator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
-      child: SfCartesianChart(),
+    Size size = MediaQuery.of(context).size;
+    return Container(
+      margin: const EdgeInsets.only(left: 5, right: 5, bottom: 5, top: 8),
+      width: double.infinity,
+      height: size.width * 0.59,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: const [
+          BoxShadow(
+            blurRadius: 1,
+            offset: Offset(0, 1),
+            color: Color.fromARGB(255, 194, 194, 194),
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
+        child: SfCartesianChart(),
+      ),
     );
   }
 }

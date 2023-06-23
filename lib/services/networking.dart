@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class NetworkHelper {
   static String baseUrl =
-      'https://a7ad-2401-4900-1f3d-d838-f62-a1fe-7ac6-47d3.ngrok-free.app/api/';
+      'https://c398-2401-4900-1f3d-d838-ab0e-bae2-a5f4-c469.ngrok-free.app/api/';
 
   Future<Response> getData(String? email) async {
     Response response = await get(Uri.parse('${baseUrl}login/$email'));

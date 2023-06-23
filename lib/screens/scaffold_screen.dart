@@ -1,6 +1,6 @@
 import 'package:exp_man/screens/community_screen.dart';
 import 'package:exp_man/screens/home_screen.dart';
-import 'package:exp_man/screens/user_profile.dart';
+import 'package:exp_man/screens/user_profile_screen.dart';
 import 'package:exp_man/screens/wishlist_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:exp_man/screens/add_expense_screen.dart';
@@ -22,20 +22,26 @@ class _ScaffoldScreenState extends State<ScaffoldScreen> {
     navigationPages = [
       const HomeScreen(),
       const CommunityScreen(),
-      const AddExpenseScreen(),
+      AddExpenseScreen(
+        onNewExpenseSave: () {
+          setState(() {
+            selectedIndex = 0;
+          });
+        },
+      ),
       const WishlistScreen(),
       const UserProfile()
     ];
     super.initState();
   }
 
-  void addExpenseBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-        useSafeArea: true,
-        isScrollControlled: true,
-        context: context,
-        builder: (context) => const AddExpenseScreen());
-  }
+  // void addExpenseBottomSheet(BuildContext context) {
+  //   showModalBottomSheet(
+  //       useSafeArea: true,
+  //       isScrollControlled: true,
+  //       context: context,
+  //       builder: (context) => AddExpenseScreen());
+  // }
 
   @override
   Widget build(BuildContext context) {
