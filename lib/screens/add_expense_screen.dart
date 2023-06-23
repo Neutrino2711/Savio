@@ -4,14 +4,14 @@ import 'package:provider/provider.dart';
 
 enum Category { food, travel, work, leisure }
 
-class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
+class AddExpenseScreen extends StatefulWidget {
+  const AddExpenseScreen({super.key});
 
   @override
-  State<NewExpense> createState() => _NewExpenseState();
+  State<AddExpenseScreen> createState() => _AddExpenseScreenState();
 }
 
-class _NewExpenseState extends State<NewExpense> {
+class _AddExpenseScreenState extends State<AddExpenseScreen> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   Category _selectedCategory = Category.leisure;

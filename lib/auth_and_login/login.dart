@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:exp_man/auth_and_login/google_signin.dart';
 import 'package:exp_man/providers/student.dart';
-import 'package:exp_man/screens/home_screen.dart';
+import 'package:exp_man/screens/scaffold_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:exp_man/services/networking.dart';
 import 'package:flutter/material.dart';
@@ -65,12 +65,14 @@ class LoginPage extends StatelessWidget {
                           //user found
                           // if (mounted!) return;
                           dynamic userDetail = jsonDecode(userData.body);
-                          Provider.of<Student>(context, listen: false).update(data: userDetail);
+                          Provider.of<Student>(context, listen: false)
+                              .update(data: userDetail);
                           // print(student.name);
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => const HomeScreen())));
+                                  builder: ((context) =>
+                                      const ScaffoldScreen())));
                         } else if (userData.statusCode == 404) {
                           //user not found
                           Navigator.push(

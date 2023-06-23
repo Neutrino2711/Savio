@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'signup.dart';
 import 'login.dart';
 
-class home extends StatelessWidget {
-  const home({super.key});
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   static String id = 'home';
 

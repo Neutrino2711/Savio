@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+// ignore: must_be_immutable
 class MyCustomBottomNavigationBar extends StatefulWidget {
   MyCustomBottomNavigationBar(
       {super.key, required this.onAddPress, required this.onProfilePress});

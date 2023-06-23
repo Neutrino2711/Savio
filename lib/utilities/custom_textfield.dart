@@ -46,7 +46,6 @@ class CustomTextField extends StatelessWidget {
                 label: Text(label),
                 hintStyle: Theme.of(context).textTheme.bodySmall,
                 hintText: hint,
-                // labelStyle: TextStyle(color: Colors.white),
               ),
               controller: textEditingController,
               autofillHints: gethints(label),

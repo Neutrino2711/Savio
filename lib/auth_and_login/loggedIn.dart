@@ -1,11 +1,6 @@
-import 'package:exp_man/auth_and_login/google_signin.dart';
 import 'package:flutter/material.dart';
+import 'package:exp_man/auth_and_login/google_signin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-// import 'package:movie_app/providers/loader.dart';
-// import 'package:movie_app/providers/user.dart';
-
-// import 'networking.dart';
 import 'package:provider/provider.dart';
 
 class LoggedIn extends StatelessWidget {

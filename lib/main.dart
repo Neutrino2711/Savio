@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:exp_man/auth_and_login/google_signin.dart';
 import 'package:exp_man/providers/student.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +58,7 @@ class MyApp extends StatelessWidget {
             '/': (context) => LoginPage(),
             LoginPage.routename: (context) => LoginPage(),
             RegisterPage.routeName: (context) => RegisterPage(),
-            home.id: (context) => home(),
+            Home.id: (context) => Home(),
           },
         ),
       );

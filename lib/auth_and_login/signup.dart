@@ -8,7 +8,7 @@ import '../utilities/custom_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:exp_man/providers/student.dart';
 import 'package:provider/provider.dart';
-import 'package:exp_man/screens/home_screen.dart';
+import 'package:exp_man/screens/scaffold_screen.dart';
 
 class RegisterPage extends StatelessWidget {
   static const routeName = '/register';
@@ -83,7 +83,7 @@ class RegisterPage extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => const HomeScreen())));
+                              builder: ((context) => const ScaffoldScreen())));
                     } else {
                       //use snackbar to tell that email entered already exists
                     }
