@@ -9,7 +9,7 @@ class ProfileStackDesign extends StatelessWidget {
     return Stack(
       children: [
         SizedBox(
-          height: screenHeight * 0.297,
+          height: screenHeight * 0.26,
         ),
         Container(
           height: screenHeight * 0.2,
@@ -22,7 +22,7 @@ class ProfileStackDesign extends StatelessWidget {
         ),
         Positioned(
           top: screenHeight * 0.11,
-          left: screenHeight * 0.162,
+          left: screenHeight * 0.168,
           child: Container(
             decoration: const BoxDecoration(
               color: Color(0xFFfafafa),
@@ -39,7 +39,7 @@ class ProfileStackDesign extends StatelessWidget {
         ),
         Positioned(
           top: screenHeight * 0.11,
-          left: screenHeight * 0.1648,
+          left: screenHeight * 0.1699,
           child: Center(
             child: IconButton(
               onPressed: () {},

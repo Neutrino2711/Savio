@@ -35,14 +35,6 @@ class _ScaffoldScreenState extends State<ScaffoldScreen> {
     super.initState();
   }
 
-  // void addExpenseBottomSheet(BuildContext context) {
-  //   showModalBottomSheet(
-  //       useSafeArea: true,
-  //       isScrollControlled: true,
-  //       context: context,
-  //       builder: (context) => AddExpenseScreen());
-  // }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(

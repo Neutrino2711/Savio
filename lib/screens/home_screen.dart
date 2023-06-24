@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Center(
       child: SingleChildScrollView(
-        physics: const ScrollPhysics(parent: BouncingScrollPhysics()),
+        physics: const BouncingScrollPhysics(parent: BouncingScrollPhysics()),
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
