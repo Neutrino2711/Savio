@@ -1,3 +1,4 @@
+import 'package:exp_man/screens/edit_profile_screen.dart';
 import 'package:exp_man/utilities/profile_stack_design.dart';
 import 'package:exp_man/widgets/user_detail_tile.dart';
 import 'package:flutter/material.dart';
@@ -52,10 +53,17 @@ class _UserProfileState extends State<UserProfile> {
             child: Column(
               children: [
                 UserdetailTile(
-                  title: 'User profile',
+                  Icons.account_circle_outlined,
                   titleDescription: 'Edit your profile name and city',
-                  leadingIcon: Icons.account_circle_outlined,
-                  onPress: () {},
+                  trailingIcon: Icons.chevron_right_outlined,
+                  title: 'User profile',
+                  onPress: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => const EditProfileScreen(
+                                title: 'Edit User Profile'))));
+                  },
                 ),
                 const Divider(
                   thickness: 0.5,
@@ -63,9 +71,10 @@ class _UserProfileState extends State<UserProfile> {
                   endIndent: 20,
                 ),
                 UserdetailTile(
-                  title: 'Budget',
+                  Icons.account_balance_wallet_outlined,
                   titleDescription: 'View your total and category budgets',
-                  leadingIcon: Icons.account_balance_wallet_outlined,
+                  trailingIcon: Icons.chevron_right_outlined,
+                  title: 'Budget',
                   onPress: () {},
                 ),
                 const Divider(
@@ -74,9 +83,10 @@ class _UserProfileState extends State<UserProfile> {
                   endIndent: 20,
                 ),
                 UserdetailTile(
-                  title: 'Saved posts',
+                  Icons.bookmark_outline,
                   titleDescription: 'See all the saved posts from community',
-                  leadingIcon: Icons.bookmark_outline,
+                  trailingIcon: Icons.chevron_right_outlined,
+                  title: 'Saved posts',
                   onPress: () {},
                 ),
                 const Divider(
@@ -85,9 +95,10 @@ class _UserProfileState extends State<UserProfile> {
                   endIndent: 20,
                 ),
                 UserdetailTile(
-                  title: 'Savings',
+                  Icons.account_balance_outlined,
                   titleDescription: 'See your monthly savings',
-                  leadingIcon: Icons.account_balance_outlined,
+                  trailingIcon: Icons.chevron_right_outlined,
+                  title: 'Savings',
                   onPress: () {},
                 ),
                 const Divider(
@@ -96,9 +107,10 @@ class _UserProfileState extends State<UserProfile> {
                   endIndent: 20,
                 ),
                 UserdetailTile(
-                  title: 'My posts',
+                  Icons.forum_outlined,
                   titleDescription: 'View all your posts',
-                  leadingIcon: Icons.forum_outlined,
+                  trailingIcon: Icons.chevron_right_outlined,
+                  title: 'My posts',
                   onPress: () {},
                 ),
                 const Divider(

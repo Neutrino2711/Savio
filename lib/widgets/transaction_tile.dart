@@ -7,6 +7,10 @@ enum Category { food, travel, work, leisure }
 class TransactionTileBuilder extends StatelessWidget {
   const TransactionTileBuilder({super.key});
 
+  void newFunction(int value) {
+    return;
+  }
+
   @override
   Widget build(BuildContext context) {
     Student student = Provider.of<Student>(context);
@@ -21,9 +25,36 @@ class TransactionTileBuilder extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  student.transactions[index]['title'],
-                  style: Theme.of(context).textTheme.titleLarge,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      student.transactions[index]['title'],
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    PopupMenuButton(
+                      padding: const EdgeInsets.all(0),
+                      iconSize: 21,
+                      itemBuilder: ((context) => [
+                            const PopupMenuItem(
+                              height: 30,
+                              value: 0,
+                              child: Text('Modify'),
+                            ),
+                            const PopupMenuItem(
+                              height: 30,
+                              value: 1,
+                              child: Text('Delete'),
+                            ),
+                          ]),
+                      onSelected: (value) {
+                        if (value == 1) {
+                          student.deleteTransaction(
+                              student.transactions[index]['id']);
+                        }
+                      },
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 4),
                 Row(

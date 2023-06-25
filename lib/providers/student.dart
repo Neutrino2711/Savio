@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:exp_man/services/networking.dart';
 import 'package:http/http.dart';
 import 'package:flutter/cupertino.dart';
@@ -30,14 +29,14 @@ class Student with ChangeNotifier {
     if (title.isEmpty || amount == null || amount < 0) {
       return Future.value(false);
     }
-    Response response = await NetworkHelper().postData(
-        url: 'addTransaction/',
-        jsonMap: {
-          'title': title,
-          'amount': amount,
-          'category': category,
-          'student': id
-        });
+    await NetworkHelper().postData(url: 'transaction/create/', jsonMap: {
+      'title': title,
+      'amount': amount,
+      'category': category,
+      'student': id
+    });
+    Response response =
+        await NetworkHelper().getData('student/retrieve/$email');
     dynamic data = jsonDecode(response.body);
     if (response.statusCode >= 200 && response.statusCode < 300) {
       update(data: data);
@@ -45,6 +44,22 @@ class Student with ChangeNotifier {
       return Future.value(true);
     } else {
       return Future.value(false);
+    }
+  }
+
+  void deleteTransaction(int value) async {
+    Response response = await NetworkHelper().deleteTransaction(value);
+    if (response.statusCode == 204) {
+      Response userData =
+          await NetworkHelper().getData('student/retrieve/$email');
+      if (userData.statusCode >= 200 && userData.statusCode < 300) {
+        dynamic userDetail = jsonDecode(userData.body);
+        update(data: userDetail);
+        notifyListeners();
+        return;
+      } else {
+        print(response.statusCode);
+      }
     }
   }
 }

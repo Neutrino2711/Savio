@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 class UserdetailTile extends StatelessWidget {
-  const UserdetailTile(
+  const UserdetailTile(this.leadingIcon,
       {super.key,
       required this.title,
       required this.titleDescription,
-      required this.leadingIcon,
+      required this.trailingIcon,
       required this.onPress});
 
   final String title;
   final String titleDescription;
   final IconData leadingIcon;
+  final IconData trailingIcon;
   final void Function() onPress;
 
   @override
@@ -30,7 +31,7 @@ class UserdetailTile extends StatelessWidget {
               .textTheme
               .bodySmall!
               .copyWith(fontWeight: FontWeight.w500)),
-      trailing: const Icon(Icons.chevron_right_outlined),
+      trailing: Icon(trailingIcon),
       onTap: onPress,
     );
   }

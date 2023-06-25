@@ -58,8 +58,8 @@ class LoginPage extends StatelessWidget {
                         await provider.googleLogin();
                         final user = FirebaseAuth.instance.currentUser;
                         debugPrint(user!.email);
-                        Response userData =
-                            await NetworkHelper().getData(user.email);
+                        Response userData = await NetworkHelper()
+                            .getData('student/retrieve/${user.email}');
                         if (userData.statusCode >= 200 &&
                             userData.statusCode < 300) {
                           //user found

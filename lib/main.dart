@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData.light(),
+          theme: ThemeData.dark(),
           // theme: ThemeData.dark().copyWith(
           //     textTheme: TextTheme(
           //       titleLarge: TextStyle(
