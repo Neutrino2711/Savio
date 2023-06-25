@@ -1,12 +1,22 @@
+import 'dart:convert';
+
+import 'package:adaptive_dialog/adaptive_dialog.dart';
+import 'package:exp_man/services/networking.dart';
 import 'package:flutter/material.dart';
 import 'package:exp_man/providers/student.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 enum Category { food, travel, work, leisure }
 
-class TransactionTileBuilder extends StatelessWidget {
+class TransactionTileBuilder extends StatefulWidget {
   const TransactionTileBuilder({super.key});
 
+  @override
+  State<TransactionTileBuilder> createState() => _TransactionTileBuilderState();
+}
+
+class _TransactionTileBuilderState extends State<TransactionTileBuilder> {
   void newFunction(int value) {
     return;
   }
@@ -29,7 +39,7 @@ class TransactionTileBuilder extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      student.transactions[index]['title'],
+                      '${student.transactions[index]['title']}',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     PopupMenuButton(
@@ -47,10 +57,57 @@ class TransactionTileBuilder extends StatelessWidget {
                               child: Text('Delete'),
                             ),
                           ]),
-                      onSelected: (value) {
+                      onSelected: (value) async {
                         if (value == 1) {
                           student.deleteTransaction(
                               student.transactions[index]['id']);
+                        } else {
+                          var result = await showTextInputDialog(
+                              title: "Update Transaction",
+                              barrierDismissible: true,
+                              // style: AdaptiveStyle
+                              context: context,
+                              textFields: [
+                                DialogTextField(
+                                  hintText: "Transaction title",
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "This field is required";
+                                    }
+                                  },
+                                ),
+                                DialogTextField(
+                                  hintText: "Transaction amount",
+                                  keyboardType: TextInputType.number,
+                                  validator: (value) {
+                                    if (value == null || value.isEmpty) {
+                                      return "This field is required";
+                                    }
+                                    var amount = double.tryParse(value);
+                                    if (amount == null) {
+                                      return "Only numeric input allowed.";
+                                    }
+                                  },
+                                )
+                              ]);
+                          if (result == null) return;
+                          Response response = await NetworkHelper().putData(
+                              url:
+                                  'transaction/update/${student.transactions[index]['id']}',
+                              jsonMap: {
+                                "title": result[0],
+                                "amount": result[1]
+                              });
+                          if (response.statusCode == 200) {
+                            dynamic updatedTransaction =
+                                jsonDecode(response.body);
+                            setState(() {
+                              student.transactions[index]['title'] =
+                                  updatedTransaction['title'];
+                              student.transactions[index]['amount'] =
+                                  updatedTransaction['amount'];
+                            });
+                          }
                         }
                       },
                     ),

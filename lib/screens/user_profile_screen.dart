@@ -37,13 +37,7 @@ class _UserProfileState extends State<UserProfile> {
           const SizedBox(
             height: 7,
           ),
-          Text(
-            student.email,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: Colors.black54),
-          ),
+          Text(student.email, style: Theme.of(context).textTheme.bodyMedium!),
           const SizedBox(
             height: 25,
           ),

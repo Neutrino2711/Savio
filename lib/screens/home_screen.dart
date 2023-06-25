@@ -48,13 +48,13 @@ class HomeScreen extends StatelessWidget {
           margin: const EdgeInsets.only(left: 5, right: 5, bottom: 8, top: 8),
           height: size.width * 0.15,
           decoration: BoxDecoration(
-            color: Colors.white,
+            // color: Colors.white,
             borderRadius: BorderRadius.circular(35),
             boxShadow: const [
               BoxShadow(
                 blurRadius: 1,
                 offset: Offset(0, 1),
-                color: Color.fromARGB(255, 194, 194, 194),
+                // color: Color.fromARGB(255, 194, 194, 194),
               ),
             ],
           ),

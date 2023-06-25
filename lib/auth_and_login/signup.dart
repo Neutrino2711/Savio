@@ -13,7 +13,6 @@ import 'package:exp_man/screens/scaffold_screen.dart';
 class RegisterPage extends StatelessWidget {
   static const routeName = '/register';
   final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
   final TextEditingController cityController = TextEditingController();
 
   RegisterPage({super.key});
@@ -22,8 +21,8 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
-    debugPrint(user?.email);
+    final user = FirebaseAuth.instance.currentUser!;
+    debugPrint(user.email);
     var dimensions = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(
@@ -47,14 +46,6 @@ class RegisterPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              CustomTextField(
-                label: 'Email',
-                iconData: Icons.email,
-                textEditingController: emailController,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
               const SizedBox(
                 height: 20,
               ),
@@ -72,9 +63,7 @@ class RegisterPage extends StatelessWidget {
                   label: 'Sign Up',
                   action: () async {
                     Response newUserData = await apiModel.createUser(
-                        nameController.text,
-                        emailController.text,
-                        cityController.text);
+                        nameController.text, user.email!, cityController.text);
                     if (newUserData.statusCode >= 200) {
                       dynamic newUserDetail = jsonDecode(newUserData.body);
                       Student student =

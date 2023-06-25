@@ -10,6 +10,7 @@ class Student with ChangeNotifier {
   List<dynamic> transactions = [];
   List<dynamic> budgets = [];
   double credit_score = 0.0;
+  double total_budget = 0.0;
   String city = '';
 
   void update({required dynamic data}) {
@@ -20,6 +21,17 @@ class Student with ChangeNotifier {
     budgets = data['budgets'];
     credit_score = double.tryParse(data['credit_score'] as String)!;
     city = data['city'];
+    total_budget = double.tryParse(data['total_budget'] as String)!;
+    notifyListeners();
+  }
+
+  void retrieveUpdatedData() async {
+    Response response =
+        await NetworkHelper().getData('student/retrieve/$email');
+    if (response.statusCode == 200) {
+      dynamic data = jsonDecode(response.body);
+      update(data: data);
+    }
   }
 
   Future<bool> addTransaction(
@@ -40,7 +52,6 @@ class Student with ChangeNotifier {
     dynamic data = jsonDecode(response.body);
     if (response.statusCode >= 200 && response.statusCode < 300) {
       update(data: data);
-      notifyListeners();
       return Future.value(true);
     } else {
       return Future.value(false);
@@ -55,7 +66,6 @@ class Student with ChangeNotifier {
       if (userData.statusCode >= 200 && userData.statusCode < 300) {
         dynamic userDetail = jsonDecode(userData.body);
         update(data: userDetail);
-        notifyListeners();
         return;
       } else {
         print(response.statusCode);

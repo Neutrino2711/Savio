@@ -12,13 +12,13 @@ class GraphGenerator extends StatelessWidget {
       width: double.infinity,
       height: size.width * 0.59,
       decoration: BoxDecoration(
-        color: Colors.white,
+        // color: Colors.white,
         borderRadius: BorderRadius.circular(5),
         boxShadow: const [
           BoxShadow(
             blurRadius: 1,
             offset: Offset(0, 1),
-            color: Color.fromARGB(255, 194, 194, 194),
+            // color: Color.fromARGB(255, 194, 194, 194),
           ),
         ],
       ),

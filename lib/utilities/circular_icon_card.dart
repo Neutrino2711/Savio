@@ -16,12 +16,12 @@ class CircularIconCard extends StatelessWidget {
         height: size.width * 0.15,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: Colors.white,
+          // color: Colors.white,
           boxShadow: [
             BoxShadow(
               blurRadius: 1,
               offset: Offset(0, 1),
-              color: Color.fromARGB(255, 194, 194, 194),
+              // color: Color.fromARGB(255, 194, 194, 194),
             ),
           ],
         ),
