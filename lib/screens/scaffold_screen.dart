@@ -50,10 +50,6 @@ class _ScaffoldScreenState extends State<ScaffoldScreen> {
           actions: [
             IconButton(
               onPressed: () {},
-              icon: const Icon(Icons.credit_score),
-            ),
-            IconButton(
-              onPressed: () {},
               icon: const Icon(Icons.notifications),
             )
           ],

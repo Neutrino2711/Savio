@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const CircularIconCard(),
-                  const CircularIconCard(),
+                  // const CircularIconCard(),
                   elongatedContainer(size, student),
                 ],
               ),
@@ -103,7 +103,8 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
           child: Center(
-            child: Text('\$ ${student.savings.toString()}'),
+            child: Text(
+                'Sav: \$${student.savings.toString()}        Exp: \$${student.expense.toString()}'),
           ),
         ),
       ),

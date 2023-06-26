@@ -33,7 +33,15 @@ class CircularIconCard extends StatelessWidget {
             ),
           ],
         ),
-        child: const Center(child: Text('icon')),
+        child: Center(
+          child: IconButton(
+            onPressed: () {},
+            icon: const Icon(
+              Icons.credit_score,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }

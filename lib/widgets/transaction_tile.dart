@@ -39,9 +39,14 @@ class _TransactionTileBuilderState extends State<TransactionTileBuilder> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${student.transactions[index]['title']}',
+                      '${student.transactions[index]['title']}  ',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
+                    Text(
+                      '(${student.transactions[index]['category']})',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                    Spacer(),
                     PopupMenuButton(
                       //change icon color
                       padding: const EdgeInsets.all(0),
@@ -119,8 +124,7 @@ class _TransactionTileBuilderState extends State<TransactionTileBuilder> {
                   children: [
                     Text('\$${student.transactions[index]['amount']}'),
                     const Spacer(),
-                    Text(
-                        'category: ${student.transactions[index]['category']}'),
+                    Text('${student.transactions[index]['date']}'),
                   ],
                 )
               ],
