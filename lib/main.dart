@@ -2,6 +2,7 @@
 
 import 'package:exp_man/auth_and_login/google_signin.dart';
 import 'package:exp_man/providers/student.dart';
+import 'package:exp_man/screens/loading_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'auth_and_login/signup.dart';
@@ -27,7 +28,37 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData.dark(),
+          theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: Color.fromRGBO(24, 25, 32, 1),
+            primaryColor: Color(0xFF21212f),
+            appBarTheme: AppBarTheme(
+              color: Color.fromRGBO(24, 25, 32, 1),
+              shadowColor: Colors.black87, // Change the AppBar color
+              elevation: 8,
+            ),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+              selectedIconTheme: IconThemeData(
+                color: Color(0xFFd988a1),
+              ),
+              selectedItemColor: Color(0xFFd988a1),
+              backgroundColor: Color.fromRGBO(24, 25, 32, 1),
+              elevation: 20,
+            ),
+            // colorScheme: ColorScheme.fromSwatch().copyWith(
+            //   primary: Color(0xFF50559a),
+            // ),
+            cardTheme: CardTheme(
+              color: Color.fromRGBO(37, 42, 52, 1),
+              elevation: 2,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(26),
+              ),
+            ),
+
+            iconTheme: IconThemeData(
+              color: Color(0xFFd988a1),
+            ),
+          ),
           // theme: ThemeData.dark().copyWith(
           //     textTheme: TextTheme(
           //       titleLarge: TextStyle(
@@ -55,7 +86,7 @@ class MyApp extends StatelessWidget {
           //     )),
           // home: HomePage(),
           routes: {
-            '/': (context) => LoginPage(),
+            '/': (context) => LoadingScreen(),
             LoginPage.routename: (context) => LoginPage(),
             RegisterPage.routeName: (context) => RegisterPage(),
             Home.id: (context) => Home(),
@@ -63,3 +94,4 @@ class MyApp extends StatelessWidget {
         ),
       );
 }
+//#d988a1    #1b1a25   #21212f    #50559a    #2f3743   #b785b5

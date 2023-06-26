@@ -2,14 +2,16 @@ import 'package:exp_man/utilities/circular_icon_card.dart';
 import 'package:flutter/material.dart';
 import 'package:exp_man/utilities/graph_generator.dart';
 import 'package:exp_man/widgets/transaction_tile.dart';
+import 'package:exp_man/providers/student.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Student student = Provider.of<Student>(
-    //     context); //listen ko false na dene se stl widget hote hue bhi build har baar run hoga jab jab provider value change hoga
+    Student student = Provider.of<Student>(
+        context); //listen ko false na dene se stl widget hote hue bhi build har baar run hoga jab jab provider value change hoga
     Size size = MediaQuery.of(context).size;
     return Center(
       child: SingleChildScrollView(
@@ -23,14 +25,47 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 width: size.width,
               ),
-              const GraphGenerator(),
+              GraphGenerator(
+                id: student.id,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const CircularIconCard(),
                   const CircularIconCard(),
-                  elongatedContainer(size),
+                  elongatedContainer(size, student),
                 ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: Row(
+                  children: [
+                    const Expanded(
+                        child: Divider(
+                      thickness: 0.9,
+                      indent: 5,
+                      endIndent: 10,
+                    )),
+                    Text(
+                      'Your Transactions',
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(color: Colors.white70),
+                    ),
+                    const Expanded(
+                        child: Divider(
+                      thickness: 0.9,
+                      indent: 10,
+                      endIndent: 5,
+                    )),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               const TransactionTileBuilder(),
             ],
@@ -40,7 +75,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Expanded elongatedContainer(Size size) {
+  Expanded elongatedContainer(Size size, Student student) {
     return Expanded(
       child: InkWell(
         onTap: () {},
@@ -48,6 +83,15 @@ class HomeScreen extends StatelessWidget {
           margin: const EdgeInsets.only(left: 5, right: 5, bottom: 8, top: 8),
           height: size.width * 0.15,
           decoration: BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xFF50559a).withOpacity(0.7),
+                  Color(0xFFd988a1).withOpacity(0.7),
+
+                  //50559a
+                ]),
             // color: Colors.white,
             borderRadius: BorderRadius.circular(35),
             boxShadow: const [
@@ -58,8 +102,8 @@ class HomeScreen extends StatelessWidget {
               ),
             ],
           ),
-          child: const Center(
-            child: Text('monthly saving'),
+          child: Center(
+            child: Text('\$ ${student.savings.toString()}'),
           ),
         ),
       ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:exp_man/services/networking.dart';
 import 'package:http/http.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:intl/intl.dart';
 
 class Student with ChangeNotifier {
   int id = 0;
@@ -11,6 +12,8 @@ class Student with ChangeNotifier {
   List<dynamic> budgets = [];
   double credit_score = 0.0;
   double total_budget = 0.0;
+  double expense = 0.0;
+  double savings = 0.0;
   String city = '';
 
   void update({required dynamic data}) {
@@ -22,6 +25,8 @@ class Student with ChangeNotifier {
     credit_score = double.tryParse(data['credit_score'] as String)!;
     city = data['city'];
     total_budget = double.tryParse(data['total_budget'] as String)!;
+    expense = data['expense'];
+    savings = total_budget - expense;
     notifyListeners();
   }
 
@@ -37,15 +42,18 @@ class Student with ChangeNotifier {
   Future<bool> addTransaction(
       {required String title,
       required double? amount,
-      required int category}) async {
-    if (title.isEmpty || amount == null || amount < 0) {
+      required int category,
+      required DateTime? date}) async {
+    if (title.isEmpty || amount == null || amount < 0 || date == null) {
       return Future.value(false);
     }
+    String formattedDate = DateFormat("yyyy-MM-dd").format(date);
     await NetworkHelper().postData(url: 'transaction/create/', jsonMap: {
       'title': title,
       'amount': amount,
       'category': category,
-      'student': id
+      'student': id,
+      'date': formattedDate
     });
     Response response =
         await NetworkHelper().getData('student/retrieve/$email');

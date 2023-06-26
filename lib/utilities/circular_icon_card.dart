@@ -14,10 +14,18 @@ class CircularIconCard extends StatelessWidget {
         margin: const EdgeInsets.only(left: 5, right: 5, bottom: 8, top: 8),
         width: size.width * 0.15,
         height: size.width * 0.15,
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           shape: BoxShape.circle,
-          // color: Colors.white,
-          boxShadow: [
+          gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFF50559a).withOpacity(0.7),
+                Color(0xFFd988a1).withOpacity(0.7),
+
+                //50559a
+              ]),
+          boxShadow: const [
             BoxShadow(
               blurRadius: 1,
               offset: Offset(0, 1),

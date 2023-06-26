@@ -21,8 +21,11 @@ class EditProfileScreen extends StatelessWidget {
       child: Scaffold(
           body: Column(
         children: [
-          CustomAppbar(
-            title: title,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+            child: CustomAppbar(
+              title: title,
+            ),
           ),
           const SizedBox(height: 16),
           UserdetailTile(

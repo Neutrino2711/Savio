@@ -1,4 +1,5 @@
 import 'package:exp_man/screens/edit_profile_screen.dart';
+import 'package:exp_man/screens/your_savings_screen.dart';
 import 'package:exp_man/utilities/profile_stack_design.dart';
 import 'package:exp_man/widgets/user_detail_tile.dart';
 import 'package:flutter/material.dart';
@@ -64,18 +65,18 @@ class _UserProfileState extends State<UserProfile> {
                   indent: 20,
                   endIndent: 20,
                 ),
-                UserdetailTile(
-                  Icons.account_balance_wallet_outlined,
-                  titleDescription: 'View your total and category budgets',
-                  trailingIcon: Icons.chevron_right_outlined,
-                  title: 'Budget',
-                  onPress: () {},
-                ),
-                const Divider(
-                  thickness: 0.5,
-                  indent: 20,
-                  endIndent: 20,
-                ),
+                // UserdetailTile(
+                //   Icons.account_balance_wallet_outlined,
+                //   titleDescription: 'View your total and category budgets',
+                //   trailingIcon: Icons.chevron_right_outlined,
+                //   title: 'Budget',
+                //   onPress: () {},
+                // ),
+                // const Divider(
+                //   thickness: 0.5,
+                //   indent: 20,
+                //   endIndent: 20,
+                // ),
                 UserdetailTile(
                   Icons.bookmark_outline,
                   titleDescription: 'See all the saved posts from community',
@@ -93,7 +94,12 @@ class _UserProfileState extends State<UserProfile> {
                   titleDescription: 'See your monthly savings',
                   trailingIcon: Icons.chevron_right_outlined,
                   title: 'Savings',
-                  onPress: () {},
+                  onPress: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: ((context) => const SavingsScreen())));
+                  },
                 ),
                 const Divider(
                   thickness: 0.5,
@@ -107,11 +113,7 @@ class _UserProfileState extends State<UserProfile> {
                   title: 'My posts',
                   onPress: () {},
                 ),
-                const Divider(
-                  thickness: 0.5,
-                  indent: 20,
-                  endIndent: 20,
-                ),
+
                 const SizedBox(
                   height: 150,
                 ),

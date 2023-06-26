@@ -72,30 +72,30 @@ class _ScaffoldScreenState extends State<ScaffoldScreen> {
               topRight: Radius.circular(30.0),
             ),
             child: BottomNavigationBar(
-              elevation: 80,
+              elevation: 100,
               type: BottomNavigationBarType.fixed,
               currentIndex: selectedIndex,
               items: const [
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: 'Home',
-                    backgroundColor: Colors.blue),
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.message),
-                    label: 'Community',
-                    backgroundColor: Colors.blue),
+                  icon: Icon(Icons.message),
+                  label: 'Community',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.add_box_rounded),
-                    label: 'Add',
-                    backgroundColor: Colors.blue),
+                  icon: Icon(Icons.add_box_rounded),
+                  label: 'Add',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.favorite_rounded),
-                    label: 'Favorites',
-                    backgroundColor: Colors.blue),
+                  icon: Icon(Icons.favorite_rounded),
+                  label: 'Favorites',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.person_rounded),
-                    label: 'Profile',
-                    backgroundColor: Colors.blue),
+                  icon: Icon(Icons.person_rounded),
+                  label: 'Profile',
+                ),
               ],
               onTap: (value) {
                 setState(() {

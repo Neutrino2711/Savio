@@ -53,7 +53,6 @@ class RegisterPage extends StatelessWidget {
                 label: 'City',
                 iconData: Icons.location_history,
                 textEditingController: cityController,
-                hint: 'Optional, can add later too..',
               ),
               const SizedBox(
                 height: 70,

@@ -37,17 +37,22 @@ class LoginPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
+                    Container(
+                      margin: EdgeInsets.all(36.0),
+                      height: 600.0,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage('assets/images/2.png'),
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
                     SizedBox(
-                      height: dimensions.height * 0.1,
+                      height: dimensions.height * 0.01,
                     ),
-                    Text('Welcome !',
-                        style: Theme.of(context).textTheme.titleLarge),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // Text('Welcome !',
+                    //     style: Theme.of(context).textTheme.titleLarge),
+
                     CustomButton(
                       dimensions: dimensions,
                       label: 'Sign In with Google',
@@ -82,30 +87,7 @@ class LoginPage extends StatelessWidget {
                         }
                       },
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text(
-                          "Dont't have an Account? ",
-                          style: TextStyle(),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, RegisterPage.routeName);
-                          },
-                          child: Text(
-                            'Sign Up',
-                            style: TextStyle(
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium!
-                                  .fontSize,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+
                     SizedBox(
                       height: dimensions.height * 0.08,
                     ),

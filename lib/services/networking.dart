@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class NetworkHelper {
   static String baseUrl =
-      'https://fd17-2401-4900-1c3c-345b-9182-801f-bc52-10aa.ngrok-free.app/api/';
+      'https://fd17-2401-4900-1c3c-345b-9182-801f-bc52-10aa.ngrok-free.app/api/'; //'http://YadoBoi.pythonanywhere.com/api/'
 
   Future<Response> getData(String url) async {
     Response response = await get(Uri.parse('$baseUrl$url'));

@@ -14,7 +14,15 @@ class ProfileStackDesign extends StatelessWidget {
         Container(
           height: screenHeight * 0.2,
           decoration: BoxDecoration(
-            color: Colors.blue,
+            gradient: const LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Color(0xFF50559a),
+                  Color(0xFFd988a1),
+
+                  //50559a
+                ]),
             borderRadius: BorderRadius.vertical(
                 bottom: Radius.elliptical(
                     MediaQuery.of(context).size.width, 250.0)),
@@ -25,7 +33,7 @@ class ProfileStackDesign extends StatelessWidget {
           left: screenHeight * 0.168,
           child: Container(
             decoration: const BoxDecoration(
-              color: Color(0xFFfafafa),
+              color: Color.fromARGB(255, 201, 200, 200),
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(color: Colors.black26, spreadRadius: 0, blurRadius: 8)
@@ -46,7 +54,7 @@ class ProfileStackDesign extends StatelessWidget {
               icon: const Icon(
                 Icons.person_sharp,
                 size: 100,
-                color: Colors.blue,
+                color: Color(0xFFd988a1),
               ),
             ),
           ),

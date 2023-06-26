@@ -1,19 +1,54 @@
+import 'dart:convert';
+
+import 'package:exp_man/services/networking.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:http/http.dart';
 
-class GraphGenerator extends StatelessWidget {
-  const GraphGenerator({super.key});
+class GraphGenerator extends StatefulWidget {
+  const GraphGenerator({super.key, required this.id});
+
+  final int id;
+
+  @override
+  State<GraphGenerator> createState() => _GraphGeneratorState();
+}
+
+class _GraphGeneratorState extends State<GraphGenerator> {
+  List<_ChartData> chartData = [];
+
+  @override
+  void initState() async {
+    Response response =
+        await NetworkHelper().getData('student/monthlyExpenses/${widget.id}');
+    dynamic data = jsonDecode(response.body);
+    data.forEach((key, value) {
+      chartData.add(_ChartData(key, value));
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.only(left: 5, right: 5, bottom: 5, top: 8),
+      padding: EdgeInsets.only(top: 6, right: 4, left: 2),
       width: double.infinity,
-      height: size.width * 0.59,
+      height: size.width * 0.61,
       decoration: BoxDecoration(
         // color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(26),
+        gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF50559a).withOpacity(0.4),
+              Color.fromARGB(255, 240, 139, 171).withOpacity(0.3),
+
+              //50559a
+            ]),
         boxShadow: const [
           BoxShadow(
             blurRadius: 1,
@@ -24,8 +59,24 @@ class GraphGenerator extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 0),
-        child: SfCartesianChart(),
+        child: SfCartesianChart(
+          primaryXAxis: DateTimeAxis(),
+          series: <ChartSeries>[
+            LineSeries<_ChartData, DateTime>(
+              dataSource: chartData,
+              xValueMapper: (data, _) => data.date,
+              yValueMapper: (data, _) => data.expense,
+            ),
+          ],
+        ),
       ),
     );
   }
+}
+
+class _ChartData {
+  final DateTime date;
+  final double expense;
+
+  _ChartData(this.date, this.expense);
 }
