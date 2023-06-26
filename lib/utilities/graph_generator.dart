@@ -18,15 +18,21 @@ class _GraphGeneratorState extends State<GraphGenerator> {
   List<_ChartData> chartData = [];
 
   @override
-  void initState() async {
+  void initState() {
+    super.initState();
+    initialise();
+  }
+
+  void initialise() async {
     Response response =
         await NetworkHelper().getData('student/monthlyExpenses/${widget.id}');
     dynamic data = jsonDecode(response.body);
     data.forEach((key, value) {
-      chartData.add(_ChartData(key, value));
+      chartData.add(_ChartData(DateTime.parse(key), value));
     });
-
-    super.initState();
+    setState(() {
+      chartData;
+    });
   }
 
   @override
@@ -34,7 +40,7 @@ class _GraphGeneratorState extends State<GraphGenerator> {
     Size size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.only(left: 5, right: 5, bottom: 5, top: 8),
-      padding: EdgeInsets.only(top: 6, right: 4, left: 2),
+      padding: const EdgeInsets.only(top: 6, right: 4, left: 2),
       width: double.infinity,
       height: size.width * 0.61,
       decoration: BoxDecoration(
@@ -44,8 +50,8 @@ class _GraphGeneratorState extends State<GraphGenerator> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF50559a).withOpacity(0.4),
-              Color.fromARGB(255, 240, 139, 171).withOpacity(0.3),
+              const Color(0xFF50559a).withOpacity(0.4),
+              const Color.fromARGB(255, 240, 139, 171).withOpacity(0.3),
 
               //50559a
             ]),

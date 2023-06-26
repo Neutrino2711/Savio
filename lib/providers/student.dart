@@ -25,7 +25,9 @@ class Student with ChangeNotifier {
     credit_score = double.tryParse(data['credit_score'] as String)!;
     city = data['city'];
     total_budget = double.tryParse(data['total_budget'] as String)!;
-    expense = data['expense'];
+    if (data['expense'] != null) {
+      expense = double.tryParse(data['expense'].toString())!;
+    }
     savings = total_budget - expense;
     notifyListeners();
   }
