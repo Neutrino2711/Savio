@@ -44,15 +44,12 @@ class _ScaffoldScreenState extends State<ScaffoldScreen> {
             onPressed: () {},
             icon: const Icon(Icons.arrow_back),
           ),
-          title: const Text(
+          title: Text(
             'Savio',
+            style:
+                Theme.of(context).textTheme.titleLarge!.copyWith(fontSize: 24),
           ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.notifications),
-            )
-          ],
+          centerTitle: true,
         ),
         bottomNavigationBar: Container(
           decoration: const BoxDecoration(
@@ -106,3 +103,12 @@ class _ScaffoldScreenState extends State<ScaffoldScreen> {
     );
   }
 }
+
+// IconButton(
+//               onPressed: () {
+//                 showDialog(context: context, builder: ((context) => AlertDialog(
+                  
+//                 )));
+//               },
+//               icon: const Icon(Icons.notifications),
+//             )

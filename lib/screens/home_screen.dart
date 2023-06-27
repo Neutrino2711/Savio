@@ -13,6 +13,8 @@ class HomeScreen extends StatelessWidget {
     Student student = Provider.of<Student>(
         context); //listen ko false na dene se stl widget hote hue bhi build har baar run hoga jab jab provider value change hoga
     Size size = MediaQuery.of(context).size;
+
+    double expenseExceedBy = student.expense - student.total_budget;
     return Center(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(parent: BouncingScrollPhysics()),
@@ -25,35 +27,118 @@ class HomeScreen extends StatelessWidget {
               SizedBox(
                 width: size.width,
               ),
+              // Center(
+              //   child: Row(
+              //     children: [
+              //       const Expanded(
+              //           child: Divider(
+              //         thickness: 0.9,
+              //         indent: 5,
+              //         endIndent: 10,
+              //       )),
+              //       Text(
+              //         'Your Spending Pattern',
+              //         style: Theme.of(context)
+              //             .textTheme
+              //             .titleLarge!
+              //             .copyWith(color: Colors.white70),
+              //       ),
+              //       const Expanded(
+              //           child: Divider(
+              //         thickness: 0.9,
+              //         indent: 10,
+              //         endIndent: 5,
+              //       )),
+              //     ],
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 6,
+              // ),
               GraphGenerator(
                 id: student.id,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const CircularIconCard(),
-                  // const CircularIconCard(),
-                  elongatedContainer(size, student),
+                  elongatedContainer(size, student, context),
+                  CircularIconCard(
+                    alertIcon: Icons.credit_score,
+                    onPress: () {
+                      showDialog(
+                        context: context,
+                        builder: ((context) => AlertDialog(
+                              title: const Text('Credit score'),
+                              content: const Text(
+                                  'Aaj tak kisi ne credit diya bhi hai!\naya bada credit score dekhne'),
+                              actions: [
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('okay')),
+                              ],
+                            )),
+                      );
+                    },
+                  ),
+                  CircularIconCard(
+                    alertIcon: student.savings < 0
+                        ? Icons.notifications_active_outlined
+                        : Icons.notifications_outlined,
+                    onPress: () {
+                      student.savings < 0
+                          ? showDialog(
+                              context: context,
+                              builder: ((context) => AlertDialog(
+                                    title: const Text('Budget Exceeded'),
+                                    content: Text(
+                                        'Your total monthly expenses has crossed your monthly budget by \$$expenseExceedBy'),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('okay')),
+                                    ],
+                                  )),
+                            )
+                          : showDialog(
+                              context: context,
+                              builder: ((context) => AlertDialog(
+                                    title: const Text('Within Budget'),
+                                    content: const Text(
+                                        'Your total monthly expenses has not crossed your monthly budget'),
+                                    actions: [
+                                      TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('okay')),
+                                    ],
+                                  )),
+                            );
+                    },
+                  ),
                 ],
               ),
               const SizedBox(
-                height: 10,
+                height: 6,
               ),
               Center(
                 child: Row(
                   children: [
                     const Expanded(
-                        child: Divider(
-                      thickness: 0.9,
-                      indent: 5,
-                      endIndent: 10,
-                    )),
+                      child: Divider(
+                        thickness: 0.9,
+                        indent: 5,
+                        endIndent: 10,
+                      ),
+                    ),
                     Text(
                       'Your Transactions',
-                      style: Theme.of(context)
-                          .textTheme
-                          .titleLarge!
-                          .copyWith(color: Colors.white70),
+                      style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                          color: Colors.white70, fontWeight: FontWeight.w400),
                     ),
                     const Expanded(
                         child: Divider(
@@ -75,7 +160,8 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Expanded elongatedContainer(Size size, Student student) {
+  Expanded elongatedContainer(
+      Size size, Student student, BuildContext context) {
     return Expanded(
       child: InkWell(
         onTap: () {},
@@ -87,8 +173,8 @@ class HomeScreen extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color(0xFF50559a).withOpacity(0.7),
-                  Color(0xFFd988a1).withOpacity(0.7),
+                  const Color(0xFF50559a).withOpacity(0.7),
+                  const Color(0xFFd988a1).withOpacity(0.7),
 
                   //50559a
                 ]),
@@ -104,7 +190,12 @@ class HomeScreen extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-                'Sav: \$${student.savings.toString()}        Exp: \$${student.expense.toString()}'),
+              'Total monthly budget:   \$ ${student.total_budget}',
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall!
+                  .copyWith(fontSize: 14),
+            ),
           ),
         ),
       ),

@@ -58,7 +58,9 @@ class LoadingScreen extends StatelessWidget {
     });
     return Container(
       child: LoadingAnimationWidget.flickr(
-          leftDotColor: Colors.white, rightDotColor: Colors.amber, size: 100),
+          leftDotColor: const Color(0xFFd988a1).withOpacity(0.8),
+          rightDotColor: const Color(0xFF50559a).withOpacity(0.8),
+          size: 100),
     );
   }
 }

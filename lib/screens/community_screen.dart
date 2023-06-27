@@ -24,26 +24,8 @@ class _CommunityScreenState extends State<CommunityScreen> {
 
   List<String> a = ['Lucknow', 'Agartala', 'Bhubaneshwar'];
 
-  DropdownButton<String> androidDropDown(List<String> a) {
-    List<DropdownMenuItem<String>> Dropdownlist = [];
-    for (String item in a) {
-      var newItem = DropdownMenuItem(child: Text(item), value: item);
-      Dropdownlist.add(newItem);
-    }
-    Dropdownlist;
-    return DropdownButton<String>(
-        value: Selectedvalue,
-        items: Dropdownlist,
-        onChanged: (value) {
-          setState(() {
-            Selectedvalue = value.toString();
-          });
-        });
-  }
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       initialise(context);
@@ -61,7 +43,6 @@ class _CommunityScreenState extends State<CommunityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF21202e),
       floatingActionButton: OpenContainer(
         transitionDuration: const Duration(milliseconds: 500),
         transitionType: ContainerTransitionType.fadeThrough,
@@ -73,7 +54,7 @@ class _CommunityScreenState extends State<CommunityScreen> {
         closedBuilder: (context, action) => Container(
           margin: const EdgeInsets.all(16),
           decoration: const BoxDecoration(
-            color: const Color(0xFF50559a),
+            color: Color(0xFF50559a),
           ),
           child: const Icon(
             Icons.add,
@@ -86,28 +67,10 @@ class _CommunityScreenState extends State<CommunityScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(
-              height: 40.0,
-              child: Row(
-                children: [
-                  Spacer(),
-                  androidDropDown(a),
-                  Spacer(),
-                  const VerticalDivider(
-                    width: 5,
-                    thickness: 1,
-                    indent: 20,
-                    endIndent: 0,
-                    color: Colors.grey,
-                  ),
-                  Spacer(),
-                  Text('ONLINE'),
-                  Spacer(),
-                ],
-              ),
-            ),
             Expanded(
                 child: ListView.builder(
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
               itemBuilder: (context, index) {
                 if (data[index]['image_url'] == null) {
                   data[index]['image_url'] = '';

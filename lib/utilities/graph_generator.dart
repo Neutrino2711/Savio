@@ -69,6 +69,8 @@ class _GraphGeneratorState extends State<GraphGenerator> {
           primaryXAxis: DateTimeAxis(),
           series: <ChartSeries>[
             LineSeries<_ChartData, DateTime>(
+              isVisibleInLegend: true,
+              color: Color.fromARGB(255, 5, 118, 138),
               dataSource: chartData,
               xValueMapper: (data, _) => data.date,
               yValueMapper: (data, _) => data.expense,

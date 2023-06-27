@@ -11,6 +11,7 @@ class SavingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Student student = Provider.of<Student>(context);
+    double expenseExceedBy = student.expense - student.total_budget;
     return SafeArea(
         child: Scaffold(
       body: Column(
@@ -22,10 +23,15 @@ class SavingsScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 90),
-          Text(
-            '\$ ${student.savings.toString()}',
-            style: Theme.of(context).textTheme.displaySmall,
-          ),
+          student.savings < 0
+              ? Text(
+                  '\$ 0',
+                  style: Theme.of(context).textTheme.displaySmall,
+                )
+              : Text(
+                  '\$ ${student.savings.toString()}',
+                  style: Theme.of(context).textTheme.displaySmall,
+                ),
           const SizedBox(height: 10),
           Text(
             'Your monthly saving',
@@ -34,35 +40,50 @@ class SavingsScreen extends StatelessWidget {
           Container(
             height: 400,
             width: 400,
-            child: SfCircularChart(
-              legend: Legend(
-                isVisible: true,
-                overflowMode: LegendItemOverflowMode.wrap,
-                textStyle: Theme.of(context)
-                    .textTheme
-                    .titleMedium!
-                    .copyWith(fontFamily: "Alkatra", color: Colors.white),
-                position: LegendPosition.bottom,
-              ),
-              tooltipBehavior: TooltipBehavior(enable: true),
-              series: <CircularSeries>[
-                PieSeries<ChartData, String>(
-                  explode: true,
-                  explodeIndex: 0,
-                  explodeOffset: '10%',
-                  dataSource: [
-                    ChartData(
-                        'Savings', student.savings), // Sample savings data
-                    ChartData(
-                        'Expense', student.expense), // Sample expense data
-                  ],
-                  xValueMapper: (ChartData data, _) => data.category,
-                  yValueMapper: (ChartData data, _) => data.amount,
-                  dataLabelSettings: const DataLabelSettings(),
-                  enableTooltip: true,
-                )
-              ],
-            ),
+            child: student.savings < 0
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Your total monthly expense exceeds your budget by-',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(height: 30),
+                      Text(
+                        '\$ $expenseExceedBy',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.displaySmall,
+                      ),
+                    ],
+                  )
+                : SfCircularChart(
+                    legend: Legend(
+                      isVisible: true,
+                      overflowMode: LegendItemOverflowMode.wrap,
+                      textStyle: Theme.of(context)
+                          .textTheme
+                          .titleMedium!
+                          .copyWith(fontFamily: "Alkatra", color: Colors.white),
+                      position: LegendPosition.bottom,
+                    ),
+                    tooltipBehavior: TooltipBehavior(enable: true),
+                    series: <CircularSeries>[
+                      PieSeries<ChartData, String>(
+                        explode: true,
+                        explodeIndex: 0,
+                        explodeOffset: '10%',
+                        dataSource: [
+                          ChartData('Savings', student.savings),
+                          ChartData('Expense', student.expense),
+                        ],
+                        xValueMapper: (ChartData data, _) => data.category,
+                        yValueMapper: (ChartData data, _) => data.amount,
+                        dataLabelSettings: const DataLabelSettings(),
+                        enableTooltip: true,
+                      )
+                    ],
+                  ),
           ),
         ],
       ),

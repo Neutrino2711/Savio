@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'package:intl/intl.dart';
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:exp_man/services/networking.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +29,11 @@ class _TransactionTileBuilderState extends State<TransactionTileBuilder> {
       shrinkWrap: true,
       itemCount: student.transactions.length,
       itemBuilder: (context, index) {
+        DateTime date = DateTime.parse(student.transactions[index]['date']);
+        String newFormat = DateFormat.yMMMd().format(date);
         return Card(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            padding: const EdgeInsets.fromLTRB(20, 16, 20, 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -40,19 +42,18 @@ class _TransactionTileBuilderState extends State<TransactionTileBuilder> {
                   children: [
                     Text(
                       '${student.transactions[index]['title']}  ',
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(fontWeight: FontWeight.w400),
                     ),
-                    Text(
-                      '(${student.transactions[index]['category']})',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    Spacer(),
+                    const Spacer(),
                     PopupMenuButton(
                       //change icon color
                       padding: const EdgeInsets.all(0),
-                      iconSize: 21,
                       itemBuilder: ((context) => [
                             const PopupMenuItem(
+                              padding: EdgeInsets.all(0),
                               height: 30,
                               value: 0,
                               child: Text('Modify'),
@@ -97,7 +98,7 @@ class _TransactionTileBuilderState extends State<TransactionTileBuilder> {
                                 )
                               ]);
                           if (result == null) return;
-                          Response response = await NetworkHelper().putData(
+                          Response response = await NetworkHelper().patchData(
                               url:
                                   'transaction/update/${student.transactions[index]['id']}',
                               jsonMap: {
@@ -116,15 +117,24 @@ class _TransactionTileBuilderState extends State<TransactionTileBuilder> {
                           }
                         }
                       },
+                      child: Container(
+                        padding: const EdgeInsets.all(0),
+                        margin: const EdgeInsets.all(0),
+                        alignment: Alignment.centerRight,
+                        child: const Icon(
+                          Icons.more_vert,
+                          size: 21,
+                        ),
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 8),
                 Row(
                   children: [
-                    Text('\$${student.transactions[index]['amount']}'),
+                    Text('\$ ${student.transactions[index]['amount']}'),
                     const Spacer(),
-                    Text('${student.transactions[index]['date']}'),
+                    Text(newFormat),
                   ],
                 )
               ],
@@ -135,3 +145,7 @@ class _TransactionTileBuilderState extends State<TransactionTileBuilder> {
     );
   }
 }
+// Text(
+//                       '(${student.transactions[index]['category']})',
+//                       style: Theme.of(context).textTheme.bodyLarge,
+//                     ),

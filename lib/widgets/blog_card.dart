@@ -26,13 +26,20 @@ class BlogCard extends StatelessWidget {
         color: Theme.of(context).cardTheme.color,
         surfaceTintColor: Colors.white,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
           children: [
             if (image.isNotEmpty)
-              Container(child: Image.network(image, fit: BoxFit.contain)),
+              Container(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        topRight: Radius.circular(15)),
+                  ),
+                  child: Image.network(image, fit: BoxFit.fill)),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -41,27 +48,33 @@ class BlogCard extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .headlineMedium!
-                          .copyWith(fontWeight: FontWeight.bold, fontSize: 23)),
-                  const SizedBox(height: 10),
+                          .copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 23,
+                              color: Colors.white70)),
+                  const SizedBox(height: 8),
                   Text(
                     desc.length > 100
                         ? '${desc.substring(0, 100)}...'
                         : '$desc',
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 6),
                   ListTile(
                     contentPadding: EdgeInsets.zero,
-                    leading:
-                        CircleAvatar(radius: 20, child: Icon(Icons.person)),
+                    leading: const Icon(
+                      Icons.account_circle,
+                      size: 35,
+                    ),
                     title: Text(author,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
-                        )),
+                        style: Theme.of(context)
+                            .textTheme
+                            .titleMedium!
+                            .copyWith(fontWeight: FontWeight.bold)),
                     trailing: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.arrow_upward,
                           size: 20,
                         ),
